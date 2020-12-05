@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import { createPortal } from 'react-dom';
-import defaultImag from './no_icon.png';
 import PropTypes from 'prop-types';
 import './Modal.scss';
+import defaultImag from './no_icon.png';
 
 const modalRoot = document.querySelector('#modal-root');
 

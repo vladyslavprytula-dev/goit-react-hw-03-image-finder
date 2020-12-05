@@ -1,13 +1,13 @@
 import React, { Component } from 'react';
-import Container from './Components/Container/Container';
-import Seacrchbar from './Components/Searchbar/Searchbar';
-import ImageGallery from './Components/ImageGallery/ImageGallery';
-import Button from './Components/Button/Button';
-import MainLoader from './Components/MainLoader/MainLoader';
 import Loader from 'react-loader-spinner';
-import Modal from './Components/Modal/Modal';
-import Error from './Components/Error/Error';
-import picturesApi from './services/pictures-api';
+import Container from './Container/Container';
+import Seacrchbar from './Searchbar/Searchbar';
+import ImageGallery from './ImageGallery/ImageGallery';
+import Button from './Button/Button';
+import MainLoader from './MainLoader/MainLoader';
+import Modal from './Modal/Modal';
+import Error from './Error/Error';
+import picturesApi from '../services/pictures-api';
 
 class App extends Component {
   state = {
@@ -86,23 +86,13 @@ class App extends Component {
       <Container>
         <Seacrchbar onSubmit={this.formSubmit} />
         {largeImgUrl && (
-          <Modal
-            largeImgUrl={largeImgUrl}
-            alternative={alternative}
-            onClose={this.closeModal}
-          />
+          <Modal largeImgUrl={largeImgUrl} alternative={alternative} onClose={this.closeModal} />
         )}
         <ImageGallery images={pictures} onClick={this.openModal} />
         {error && <Error text={error} />}
         {isLoading && (
           <MainLoader>
-            <Loader
-              type="ThreeDots"
-              color="#2a829c"
-              height={80}
-              width={80}
-              timeout={0}
-            />
+            <Loader type="ThreeDots" color="#2a829c" height={80} width={80} timeout={0} />
           </MainLoader>
         )}
         {shouldRenderLoadMoreBtn && <Button onClick={this.fetchPictures} />}

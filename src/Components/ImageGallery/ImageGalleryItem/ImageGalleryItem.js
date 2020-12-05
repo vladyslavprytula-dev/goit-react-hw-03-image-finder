@@ -1,17 +1,21 @@
 import React from 'react';
-import './ImageGalleryItem.scss';
 import PropTypes from 'prop-types';
+import './ImageGalleryItem.scss';
 import defaultImag from './no_icon.png';
 
-const ImageGalleryItem = ({ webformatURL, tags, largeImageURL, onClick }) => {
+const ImageGalleryItem = ({ imageId, webformatURL, tags, largeImageURL, onClick }) => {
   return (
-    <img
-      src={webformatURL}
-      alt={tags}
-      data-source={largeImageURL}
-      className="ImageGalleryItem-image"
-      onClick={onClick}
-    />
+    <>
+      <li key={imageId} className="ImageGalleryItem">
+        <img
+          src={webformatURL}
+          alt={tags}
+          data-source={largeImageURL}
+          className="ImageGalleryItem-image"
+          onClick={onClick}
+        />
+      </li>
+    </>
   );
 };
 
