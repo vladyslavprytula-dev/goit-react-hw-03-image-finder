@@ -18,6 +18,7 @@ class App extends Component {
     error: null,
     largeImgUrl: '',
     alternative: '',
+    arePictureOver: false,
   };
 
   componentDidUpdate(prevProps, prevState) {
@@ -34,14 +35,19 @@ class App extends Component {
       error: null,
     });
   };
-
+  shouldRenderLoadMoreBtn = (page, totalHits) => {
+    const a = totalHits - page * 12;
+    console.log(a);
+    return a > 0
+      ? this.setState({ arePictureOver: false })
+      : this.setState({ arePictureOver: true });
+  };
   scrollDocument = () => {
     window.scrollTo({
       top: document.documentElement.scrollHeight,
       behavior: 'smooth',
     });
   };
-
   fetchPictures = () => {
     const { currentPage, searchQuery } = this.state;
     const options = {
@@ -53,7 +59,9 @@ class App extends Component {
 
     picturesApi
       .fetchPictures(options)
-      .then(hits => {
+      .then(({ hits, totalHits }) => {
+        this.shouldRenderLoadMoreBtn(this.state.currentPage, totalHits);
+        console.log(totalHits);
         this.setState(prevState => ({
           pictures: [...prevState.pictures, ...hits],
           currentPage: prevState.currentPage + 1,
@@ -61,7 +69,11 @@ class App extends Component {
         this.scrollDocument();
       })
       .catch(error => this.setState({ error }))
-      .finally(() => this.setState({ isLoading: false }));
+      .finally(() =>
+        this.setState({
+          isLoading: false,
+        }),
+      );
   };
 
   openModal = e => {
@@ -80,8 +92,9 @@ class App extends Component {
   };
 
   render() {
-    const { pictures, isLoading, largeImgUrl, error, alternative } = this.state;
-    const shouldRenderLoadMoreBtn = pictures.length > 0 && !isLoading;
+    const { pictures, isLoading, largeImgUrl, error, alternative, arePictureOver } = this.state;
+    const shouldRenderLoadMoreBtn = !arePictureOver && !isLoading && pictures.length > 0;
+    console.log(shouldRenderLoadMoreBtn);
     return (
       <Container>
         <Seacrchbar onSubmit={this.formSubmit} />
