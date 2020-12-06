@@ -20,20 +20,16 @@ class App extends Component {
     alternative: '',
     arePictureOver: false,
   };
-
-  componentDidUpdate(prevProps, prevState) {
-    if (prevState.searchQuery !== this.state.searchQuery) {
-      this.fetchPictures();
-    }
-  }
-
   formSubmit = data => {
-    this.setState({
-      searchQuery: data,
-      currentPage: 1,
-      pictures: [],
-      error: null,
-    });
+    this.setState(
+      {
+        searchQuery: data,
+        currentPage: 1,
+        pictures: [],
+        error: null,
+      },
+      this.fetchPictures,
+    );
   };
   shouldRenderLoadMoreBtn = (page, totalHits) => {
     const picturesLeft = totalHits - page * 12;

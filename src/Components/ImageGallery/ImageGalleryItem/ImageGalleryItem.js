@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import './ImageGalleryItem.scss';
 import defaultImag from './no_icon.png';
 
-const ImageGalleryItem = ({ imageId, webformatURL, tags, largeImageURL, onClick }) => {
+const ImageGalleryItem = ({ webformatURL, tags, largeImageURL, onClick }) => {
   return (
     <li className="ImageGalleryItem">
       <img
