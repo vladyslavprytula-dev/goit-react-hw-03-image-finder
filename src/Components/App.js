@@ -37,7 +37,6 @@ class App extends Component {
   };
   shouldRenderLoadMoreBtn = (page, totalHits) => {
     const a = totalHits - page * 12;
-    console.log(a);
     return a > 0
       ? this.setState({ arePictureOver: false })
       : this.setState({ arePictureOver: true });
@@ -61,7 +60,6 @@ class App extends Component {
       .fetchPictures(options)
       .then(({ hits, totalHits }) => {
         this.shouldRenderLoadMoreBtn(this.state.currentPage, totalHits);
-        console.log(totalHits);
         this.setState(prevState => ({
           pictures: [...prevState.pictures, ...hits],
           currentPage: prevState.currentPage + 1,
@@ -94,7 +92,6 @@ class App extends Component {
   render() {
     const { pictures, isLoading, largeImgUrl, error, alternative, arePictureOver } = this.state;
     const shouldRenderLoadMoreBtn = !arePictureOver && !isLoading && pictures.length > 0;
-    console.log(shouldRenderLoadMoreBtn);
     return (
       <Container>
         <Seacrchbar onSubmit={this.formSubmit} />
