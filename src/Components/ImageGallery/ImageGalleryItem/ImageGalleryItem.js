@@ -5,17 +5,15 @@ import defaultImag from './no_icon.png';
 
 const ImageGalleryItem = ({ imageId, webformatURL, tags, largeImageURL, onClick }) => {
   return (
-    <>
-      <li key={imageId} className="ImageGalleryItem">
-        <img
-          src={webformatURL}
-          alt={tags}
-          data-source={largeImageURL}
-          className="ImageGalleryItem-image"
-          onClick={onClick}
-        />
-      </li>
-    </>
+    <li className="ImageGalleryItem">
+      <img
+        src={webformatURL}
+        alt={tags}
+        data-source={largeImageURL}
+        className="ImageGalleryItem-image"
+        onClick={onClick}
+      />
+    </li>
   );
 };
 

@@ -36,10 +36,8 @@ class App extends Component {
     });
   };
   shouldRenderLoadMoreBtn = (page, totalHits) => {
-    const a = totalHits - page * 12;
-    return a > 0
-      ? this.setState({ arePictureOver: false })
-      : this.setState({ arePictureOver: true });
+    const picturesLeft = totalHits - page * 12;
+    this.setState({ arePictureOver: picturesLeft <= 0 });
   };
   scrollDocument = () => {
     window.scrollTo({
